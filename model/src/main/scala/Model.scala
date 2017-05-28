@@ -1,5 +1,7 @@
 import cats.data.Coproduct
 import cats.free.{Free, Inject}
+import io.circe.generic._
+import io.circe.syntax._
 /**
   * Created by dr0l3 on 5/26/17.
   */
@@ -34,5 +36,12 @@ object Model {
 		object Writes {
 			implicit def writes[F[_],A](implicit I: Inject[Writer, F]): Writes[F,A] = new Writes[F,A]
 		}
+	}
+	
+	def main(args: Array[String]): Unit = {
+		val a= Write("hello")
+		val b= WriteExcitedly("hello")
+		println(a.asJson.noSpaces)
+		println(b.asJson.noSpaces)
 	}
 }

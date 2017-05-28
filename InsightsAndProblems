@@ -1,0 +1,17 @@
+Model version uses the pattern
+
+sealed trait A[B]
+case class C extends A[Unit] or String or something other concrete type
+
+circe cant encode this as json for some reason
+
+Algebra version uses the pattern
+
+sealed trait A[B]
+case class C[B] extends A[B]
+
+but this makes writing interpreters quite hard because you have to write interpreters that return the type Id[B] which is hard.
+
+The model version is nice, but clearly not scalable. Imagine having a database algebra where you need a new instruction for every single case class.
+
+It seems like we need shapeless to do some magic here...
