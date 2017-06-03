@@ -19,10 +19,18 @@ def commonProject(projectName: String): Project = Project(projectName, file(proj
 
 lazy val model = commonProject("model")
 lazy val smallAlgebra = commonProject("algebraSmall")
+lazy val opsAlgebra = commonProject("opsAlgebra")
+lazy val moreOpsAlgebra = commonProject("moreOpsAlgebra")
 
 lazy val interpreter = commonProject("interpreter").dependsOn(model)
 lazy val smallInterpreter = commonProject("interpreterSmall").dependsOn(smallAlgebra)
+lazy val opsInterpreter = commonProject("opsInterpreter").dependsOn(opsAlgebra)
+lazy val moreOpsInterpreter = commonProject("moreOpsInterpreter").dependsOn(moreOpsAlgebra)
 
 lazy val run = commonProject("run").dependsOn(model).dependsOn(interpreter)
 lazy val smallRun = commonProject("smallRun").dependsOn(smallAlgebra).dependsOn(smallInterpreter)
+lazy val combiRun = commonProject("combiRun")
+	.dependsOn(smallAlgebra).dependsOn(smallInterpreter)
+	.dependsOn(opsAlgebra).dependsOn(opsInterpreter)
+	.dependsOn(moreOpsAlgebra).dependsOn(moreOpsInterpreter)
 

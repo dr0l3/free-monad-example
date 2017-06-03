@@ -19,6 +19,7 @@ object Algebra {
 		def read(): Free[F,A] = Free.inject[Console, F](Read[A]())
 		def readInt(): Free[F, Int] = Free.inject[Console, F](ReadInt())
 		def readStr(): Free[F, String] = Free.inject[Console, F](Read[String]())
+		def read2[B](): Free[F, B] = Free.inject[Console,F](Read[B]())
 	}
 	
 	object ConsoleSyntax {
